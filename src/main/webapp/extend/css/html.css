@@ -1,0 +1,65 @@
+body{
+	margin:0px;font-size:12px; font-family:宋体, Arial; min-width:850px; 
+	text-align:center;
+}
+td{
+	font-size:12px;
+}
+th{
+	font-size:12px;
+}
+ul{
+	margin:0px;padding:0;
+}
+li{
+	margin:0px;padding:0px;list-style-type:none;
+}
+div{
+margin:0 auto;
+text-align:left
+}
+/*默认超链接样式*/
+a:link{
+	color:#2E2E2E;text-decoration:none;
+}
+a:visited{
+	color:#2E2E2E;text-decoration:none;
+}
+
+a:hover{
+	color:#2E2E2E;text-decoration:underline;
+}
+a:active{
+	color:#2E2E2E; text-decoration:none;
+}
+
+
+
+
+
+
+form{}
+input {background: #FFF;}
+input[type="text"], input[type="password"], input[type="file"] {
+	background-repeat: no-repeat;
+	border: 1px solid;
+	border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
+	font: 1em Arial,Helvetica,Verdana,sans-serif;
+	padding: 0px 1px;
+	height:22px;
+	line-height:22px;
+}
+input[type="submit"], input[type="button"], input[type="reset"]{ 
+	width:auto; 
+	padding:0 5px; 
+	height:23px; 
+	border:1px solid #749CC9; 
+	color:#03438A
+	cursor:pointer
+}
+input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:focus, input[type="button"]:focus, input[type="reset"]:focus {
+	background: #DFF4FF;
+	border: 1px solid #A7CEDF;
+	color: #369;
+}
+table{}

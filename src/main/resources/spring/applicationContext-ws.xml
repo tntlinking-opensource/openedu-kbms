@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-2.5.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-2.5.xsd   
+    http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://cxf.apache.org/jaxws 
+	http://cxf.apache.org/schemas/jaxws.xsd
+	"
+	default-lazy-init="true">
+
+    <!-- Spring webservice -->
+	<!--注意下面的address，这里的address的名称就是访问的WebService的name-->
+	<!--jaxws:server id="loginWsService" serviceClass="org.pfw.framework.security.ws.LoginWsService"
+		address="/loginws">
+		<jaxws:serviceBean>
+			<ref bean="loginWsServiceImpl" />
+		</jaxws:serviceBean>
+	</jaxws:server-->
+	
+	<!-- 消息提醒webservice -->
+	<!--jaxws:server id="xxtxWsService" serviceClass="org.pfw.framework.xtgl.service.XxtxWsService"
+		address="/xxtxws">
+		<jaxws:serviceBean>
+			<ref bean="xxtxWsServiceImpl" />
+		</jaxws:serviceBean>
+	</jaxws:server-->	
+	
+	<!-- 工作流提醒webservice -->
+	<!--jaxws:server id="flowWsService" serviceClass="org.pfw.framework.flow.service.FlowWsService"
+		address="/flowws">
+		<jaxws:serviceBean>
+			<ref bean="flowWsServiceImpl" />
+		</jaxws:serviceBean>
+	</jaxws:server-->
+   
+    
+    <!-- Spring webservice -->
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+    
+</beans>

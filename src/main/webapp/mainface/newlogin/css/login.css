@@ -1,0 +1,187 @@
+.main {
+	width: 100%;
+	min-height: 100%;
+	background: url(../images/bg.jpg) center center no-repeat;
+	box-sizing: border-box;
+}
+.logo-box {
+
+}
+.logo-box>img {
+	margin-top: 6vh;
+	margin-left: 23%;
+	margin-bottom: 2.9vh;
+	width: 20%;
+}
+.login-box {
+	margin: 0 auto;
+	width: 54%;
+	height: 66vh;
+	background: #fff;
+	overflow: hidden;
+}
+.login-left {
+	position: relative;
+	float: left;
+	padding-top: 6vw;
+	width: 40%;
+	height: 100%;
+	text-align: center;
+	background: url(../images/login-bg.jpg) center center no-repeat;
+	box-sizing: border-box;
+	font-size: 1.6vw;
+	font-family: "STZhongsong";
+	color: rgba(255, 255, 255, 0.502);
+	line-height: 2.3vw;
+	text-shadow: 0px 3px 0px rgba(43, 44, 74, 0.62);
+}
+.login-left>img {
+	width: 100%;
+	height: 100%;
+}
+.login-left>img.xitong {
+	position: absolute;
+	top: 12vh;
+	left: 50%;
+	width: 76%;
+	height: auto;
+	margin-left: -38%;
+}
+.login-right {
+	position: relative;
+	float:right;
+	padding: 0 15%;
+	width: 60%;
+	height: 100%;
+	box-sizing: border-box;
+}
+.tips {
+	position:absolute;
+	right: 2.5%;
+	top: 0;
+	font-size: 14px;
+	font-family: "Microsoft YaHei";
+    color: #bdbdbd;
+    line-height: 5.5vh;
+}
+.tips>a {
+	color: #35b5f3;
+}
+.tips>a:hover {
+	text-decoration: underline;
+}
+.login-heading {
+	padding-top: 6.7vh;
+	font-size: 18px;
+	font-family: "Microsoft YaHei";
+    color: #179ad9;
+    text-align: center;
+    line-height: 7.4vh;
+}
+.login-name {
+	height: 4.2vh;
+	line-height: 4.2vh;
+	font-size: 14px;
+	font-family: "Microsoft YaHei";
+	color: #7a7a7a;
+}
+.login-item {
+	height: 5.4vh;
+}
+.login-item>input {
+	width: 100%;
+	height: 5.2vh;
+	border: 1px solid #c7c7c7;
+	border-radius: 5px;
+	text-indent: 5%;
+	font-size: 18px;
+	font-family: "Microsoft YaHei";
+	color: #7a7a7a;
+}
+.code-box {
+	position:relative;
+}
+.code-box input {
+ 	width: 64%;
+}
+.code-img {
+	position: absolute;
+	top: 0;
+	right: 4%;
+	width: 26%;
+	height: 5.3vh;
+}
+.code-img >img {
+	width: 100%;
+	height: 100%;
+}
+.affirm-box {
+	position: relative;
+	height: 7.2vh;
+}
+.affirm-box label {
+	float: left;
+	display: block;
+	cursor: pointer;
+	padding-left: 8%;
+	margin-top: 1.8vh;
+	font-size: 14px;
+	font-family: "Microsoft YaHei";
+	color: #a3a3a3;
+	line-height: 2.2vh;
+}
+.affirm-box .label_check {
+	background: url(../images/checkbox.png) no-repeat;
+	background-size: 2.2vh 2.2vh;
+}
+.affirm-box label.c_on {
+	background: url(../images/cselected.png) no-repeat;
+	background-size: 2.2vh 2.2vh;
+}
+.affirm-box .label_check input {
+	position: absolute;
+	left: -9999px;
+}
+.login-btn {
+	display: block;
+	width: 100%;
+    height: 7.2vh;
+    background: #35b5f3;
+    border-radius: 3vh;
+    text-align: center;
+    line-height: 7.2vh;
+    font-size: 20px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 255, 255);
+}
+.footer {
+	font-size: 14px;
+	font-family: "Microsoft YaHei";
+	color: #fff;
+	text-align: center;
+	line-height: 7.4vh;
+}
+
+@media (max-width: 1366px) {
+	.tips {
+		font-size: 14px;
+	}
+	.login-heading {
+		font-size: 22px;
+	}
+	.login-name {
+		font-size: 14px;
+	}
+	.login-item>input {
+		font-size: 14px;
+	}
+	.affirm-box label {
+		font-size: 14px;
+	}
+	.login-btn {
+	    font-size: 18px;
+	}
+	.footer {
+		font-size: 12px;
+	}
+}

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.pfw.framework.aichat.domain.TAiYhdhjg" table="T_ai_yhdhjg">
+        <comment>用户ai对话结果</comment>
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="64" />
+            <generator class="uuid.hex" />
+        </id>
+         
+        <many-to-one name="ssznt" class="org.pfw.framework.aichat.domain.TAiZnt" fetch="select">
+            <column name="ssznt" length="64">
+                <comment>所属智能体</comment>
+            </column>
+        </many-to-one>
+         
+        <many-to-one name="ssdhls" class="org.pfw.framework.aichat.domain.TAiYhdhls" fetch="select">
+            <column name="ssdhls" length="64">
+                <comment>所属对话历史</comment>
+            </column>
+        </many-to-one>
+        
+         
+        <!-- 
+        <property name="role" type="java.lang.String">
+            <column name="role" length="1">
+                <comment>1:系统回答  2：用户提问</comment>
+            </column>
+        </property>
+          -->
+        
+        <property name="yhtw" type="text">
+            <column name="yhtw" sql-type="TEXT">
+                <comment>用户提问</comment>
+            </column>
+        </property>
+        
+        <property name="skgc" type="text">
+            <column name="skgc" sql-type="TEXT">
+                <comment>思考过程</comment>
+            </column>
+        </property>
+        
+        <property name="zzda" type="text">
+            <column name="zzda" sql-type="TEXT">
+                <comment>最终答案</comment>
+            </column>
+        </property>
+        
+        
+        <property name="xghyhwt" type="text">
+            <column name="xghyhwt" sql-type="TEXT">
+                <comment>修改后用户提问</comment>
+            </column>
+        </property>
+        
+        <property name="xghzzda" type="text">
+            <column name="xghzzda" sql-type="TEXT">
+                <comment>修改后最终答案</comment>
+            </column>
+        </property>
+        
+        <many-to-one name="sszsk" class="org.pfw.framework.aichat.domain.TAiZsk" fetch="select">
+            <column name="sszsk" length="64">
+                <comment>所属知识库</comment>
+            </column>
+        </many-to-one>
+        
+		<property name="sftz" type="java.lang.String">
+			<column name="sftz" length="1">
+				<comment>是否调整</comment>
+			</column>
+		</property>
+		
+		<property name="sfxlh" type="java.lang.String">
+			<column name="sfxlh" length="1">
+				<comment>是否向量化</comment>
+			</column>
+		</property>
+        
+        <property name="tokens" type="java.lang.Integer">
+            <column name="tokens" length="500">
+                <comment>tokens</comment>
+            </column>
+        </property>
+        
+		<many-to-one name="czr" class="org.pfw.framework.domain.security.User">
+			<column name="czr" length="64">
+				<comment>操作人</comment>
+			</column>
+		</many-to-one>
+		
+		<property name="czsj" type="java.lang.String">
+			<column name="czsj" length="30">
+				<comment>操作时间</comment>
+			</column>
+		</property>
+        
+        
+    </class>
+</hibernate-mapping>

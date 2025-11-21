@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+
+	<diskStore path="java.io.tmpdir/hibernate" />
+
+	<cacheManagerEventListenerFactory class="" properties="" />
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.2,multicastGroupPort=4447,timeToLive=1"
+		propertySeparator="," />
+	<cacheManagerPeerListenerFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory" />
+
+	<!--
+		DefaultCache setting.
+		Modify ehcache-safe.xml for timeToIdleSeconds,timeToLiveSecond,diskExpiryThreadIntervalSeconds.
+		Use ehcache-safe.xml default for maxElementsInMemory,maxElementsOnDisk,overflowToDisk,eternal.
+		Use ehcache default for memoryStoreEvictionPolicy,diskPersistent.
+	-->
+	<defaultCache maxElementsInMemory="10000" overflowToDisk="true"
+		eternal="false" maxElementsOnDisk="10000"
+		diskExpiryThreadIntervalSeconds="600" timeToIdleSeconds="3600"
+		timeToLiveSeconds="7200" diskPersistent="false">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</defaultCache>
+
+	<!--<defaultCache maxElementsInMemory="10000" eternal="false"  
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"  
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120" />-->
+
+	<cache eternal="false" overflowToDisk="false"
+		maxElementsInMemory="1000" timeToLiveSeconds="1000"
+		timeToIdleSeconds="120"
+		name="org.hibernate.cache.UpdateTimestampsCache">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+
+	<cache eternal="false" overflowToDisk="false"
+		maxElementsInMemory="1000" timeToLiveSeconds="1000"
+		timeToIdleSeconds="120"
+		name="org.hibernate.cache.StandardQueryCache">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+
+	<!-- Special objects setting. -->
+	<cache name="org.pfw.framework.domain.security.User"
+		maxElementsInMemory="500" overflowToDisk="true" diskPersistent="false"
+		eternal="true">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache name="org.pfw.framework.domain.security.Role"
+		maxElementsInMemory="500" overflowToDisk="true" diskPersistent="false"
+		eternal="true">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache name="org.pfw.framework.domain.security.Resource"
+		maxElementsInMemory="500" overflowToDisk="true" diskPersistent="false"
+		eternal="true">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache name="org.pfw.framework.domain.security.Role.authorityList"
+		maxElementsInMemory="500" overflowToDisk="true" diskPersistent="false"
+		eternal="true">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache name="org.pfw.framework.domain.security.User.roleList"
+		maxElementsInMemory="500" overflowToDisk="true" diskPersistent="false"
+		eternal="true">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="org.pfw.framework.domain.security.Resource.authorityList"
+		maxElementsInMemory="500" overflowToDisk="true" diskPersistent="false"
+		eternal="true">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+
+	<!--<cache name="org.pfw.framework.domain.security.Resource.children"
+		maxElementsInMemory="500" overflowToDisk="true" diskPersistent="false"
+		eternal="true"/>-->
+	<cache name="org.pfw.framework.domain.security.Authority"
+		maxElementsInMemory="500" overflowToDisk="true" diskPersistent="false"
+		eternal="true">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache name="org.pfw.framework.xtgl.domain.Dict"
+		maxElementsInMemory="500" overflowToDisk="true" diskPersistent="false"
+		eternal="true">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator="," />
+		<bootstrapCacheLoaderFactory
+			class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<!--<cache name="org.pfw.framework.domain.Dict.children"
+		maxElementsInMemory="500" overflowToDisk="true" diskPersistent="false"
+		eternal="true"/>-->
+
+	<!--<cacheManagerPeerListenerFactory
+		class="org.terracotta.ehcachedx.monitor.probe.ProbePeerListenerFactory"
+		properties="monitorAddress=localhost, monitorPort=9889, memoryMeasurement=true" />-->
+</ehcache>

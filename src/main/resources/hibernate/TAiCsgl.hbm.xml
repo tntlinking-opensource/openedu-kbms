@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.pfw.framework.aichat.domain.TAiCsgl" table="T_ai_csgl">
+        <comment>参数管理</comment>
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="64" />
+            <generator class="uuid.hex" />
+        </id>
+        
+        <many-to-one name="sshs" class="org.pfw.framework.aichat.domain.TAiHsgl" fetch="select">
+            <column name="sshs" length="64">
+                <comment>所属函数</comment>
+            </column>
+        </many-to-one>
+        
+        <property name="name" type="java.lang.String">
+            <column name="name" length="100">
+                <comment>参数名称</comment>
+            </column>
+        </property>
+        
+        <property name="type" type="java.lang.String">
+            <column name="type" length="100">
+                <comment>类型</comment>
+            </column>
+        </property>
+        
+        <property name="description" type="java.lang.String">
+            <column name="description" length="300">
+                <comment>参数描述</comment>
+            </column>
+        </property>
+        
+        <property name="required" type="java.lang.String">
+            <column name="required" length="1">
+                <comment>是否必填参数</comment>
+            </column>
+        </property>
+        
+        
+    </class>
+</hibernate-mapping>

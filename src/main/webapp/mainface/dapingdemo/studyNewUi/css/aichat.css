@@ -1,0 +1,391 @@
+  /***header start***/
+  .aichat-header{
+  	height : 8vh;
+  	display : grid;
+  }
+  .aichat-header-menu{
+  	width : 30vw;
+  	margin : 0 auto;
+  	background-color : #e7e7e7;
+  	height : 4vh;
+  	border-radius: 0.5vw;
+  	margin-top : 1.5vh;
+  	display : flex;
+  }
+  .aichat-header-menu .act{
+  	background : #fff;
+  }
+  .aichat-header-menu .act span{
+  	font-weight : 700;
+  }
+  .header-menu-item {
+  	height : 3.3vh;
+  	margin : 0.4vh 0 0 0.6vw;
+  	width : 9.5vw;
+  	border-radius: 0.5vw;
+  	text-align : center;
+  	display : grid;
+  	cursor: pointer;
+  }
+  .header-menu-item:nth-child(1) {
+  	margin-left : 0.1vw;
+  }
+  .header-menu-item span{
+  	margin-top : 0.5vh;
+  }
+  .aichat-main {
+  	display: flex;
+  }
+  /***left start***/
+  .aichat-main-left{
+  	width : 15vw;
+  	background-color:#ffffff;
+  	margin-left : 1vw;
+  	min-height : 87vh;
+  	border-radius: 0.5vw;
+  	display : grid;
+  	position: relative;
+  }
+  .aichat-main-left-tp{
+  	height: 4vh;
+  }
+  .mfbmbtn {
+      border-radius: 0.5vw;
+      font-size: 1vw;
+      font-weight: bold;
+      width: 70%;
+      cursor: pointer;
+  }
+  .search_btn {
+      width: 90%;
+      height: 3vh;
+      background: #3b93ff;
+      border: 0vw;
+      font-size: 0.9vw;
+      color: #fff;
+      margin : 1vh 0 0 0.8vw;
+  }
+  .aichat-main-left-bdy{
+  	min-height : 65vh;
+  	margin-bottom : 7vh;
+  }
+  
+  .chatgroup-time{
+  	width: 100%;
+  	font-weight : bold;
+  	margin: 1vh 0.5vw;
+  }
+   
+  .aichat-main-left-fot{
+  	position: absolute;
+  	bottom: 1vh;
+  }
+  .kc_sub_btn {
+      width: 10vw;
+      height: 3vh;
+      border-radius: 0.5vw;
+      display: flex;
+      border: 0.1vw solid;
+      line-height: 3vh;
+      cursor: pointer;
+      margin : 1vh 0 0 0.8vw;
+      padding-left : 3vw
+  }
+  .kc_sub_btn img {
+      width: 0.8vw;
+      height: 0.8vw;
+      margin: 0.7vh 0.5vw 0 0.5vw;
+  }
+  
+  /***right start***/
+  .aichat-main-right{
+  	width : 81vw;
+  	background-color:#ffffff;
+  	margin-left: 1.5vw;
+  	min-height : 87vh;
+  	border-radius: 0.5vw;
+  	box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.14);
+  }
+  
+  .chat-box{
+  	height: 80vh;
+  	overflow-y: auto;
+      border-bottom: 1px solid #ddd;
+      display: gird;
+  }
+  .message{
+  	min-height: 3vh;
+  	margin: 1vh 0.5vw 2vh 0.5vw;
+  }
+  .message .div_p {
+      display: inline-block;
+      padding: 0.5vw;
+      border-radius: 4px;
+      max-width: 80%;
+      text-align: left;
+  }
+  .div_p p {
+  	
+  	line-height: 2.5vh;
+    margin: 1vh 0;
+  }
+  .user{
+  	text-align: right;
+  }
+  .message.user .div_p{
+  	background-color: #eff6ff;
+      color: #262626;
+      line-height: 2.5vh;
+  }
+  .bot{
+  	text-align: left;
+  }
+  .message.bot .bot-think{
+      color: #8b8b8b;
+      margin-left: 2vw;
+      border-left: 0.1vw solid #e5e5e5;
+  }
+  .message.bot .bot-reslut{
+  	background-color: #f1f1f1;
+      color: #333;
+      margin: 1vw 0 4vh 2vw;
+      line-height: 2.5vh;
+      display:block;
+  }
+  .message.bot{
+  	position: relative;
+  }
+  .msgbot-icon{
+  	position: absolute;
+    top: -0.2vh;
+    left: 0;
+    width: 1.5vw;
+  }
+  .msgbot-icon img {
+  	width: 100%;
+    height: 100%;
+  }
+  .chat-input{
+  	display: flex;
+  	width: 95%;
+  	margin: 0 auto;
+  }
+  .user-input{
+  	/**
+      padding: 0.5vw;
+      border: 0.1vw solid #ddd;
+      border-radius: 4px;
+      outline: none;
+      width: 95%;
+      background-color: #f3f4f6;
+      **/
+      flex: 1;
+      padding: 0.5vw;
+      border: 0.1vw solid #ddd;
+      border-radius: 0.5vw;
+      outline: none;
+      margin: 2vh 0;
+  }
+  .send-btn{
+  	margin: 2vh 0.8vw;
+  	padding: 0.5vw 1vw;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 0.5vw;
+      cursor: pointer;
+  }
+  
+  /***foot start***/
+  .aichat-foot {
+  	height : 3vh;
+  	text-align : center;
+  }
+  
+  .chatgroup-item{
+  	 cursor: pointer;
+     overflow: hidden;
+	 text-overflow: ellipsis;
+	 white-space: nowrap;
+	 width: 10vw;
+	 line-height: 1.5vh;
+	 margin-top:0.5vh;
+     margin-left: 3.5vh;
+     padding:1vh;
+     font-size:0.7vw;
+  }
+  .chatgroup-item-checkls{ 
+  	background-color: #eee;
+  	border-radius: 1vh;
+  }
+  
+  
+  .chatgroup-time-content{
+  	overflow-y: auto; 
+  	padding: 1vh;
+  	height: 64vh; 
+  	scrollbar-width: none;
+    padding-top: 0px;
+  }
+  .chatgroup-time-zjdh{
+  	display:flex;align-items: center;width: 100%;
+  }
+	.chatgroup-time-img{
+	    display: flex;
+	    align-items: center;
+	}
+	.aichat-main-left-logo{
+	    height: 8vh;
+	}
+	.aichat-main-left-lsdh{
+	    cursor: pointer;
+		height: 0vh;
+		margin:1vw;
+	    height: 0vh;
+	    width:85%;
+	}
+	.aichat-main-left-item{
+		margin:1vw;
+	    height: 2vh;
+	}
+	.chatgroup-time-text{
+		width: 50%;
+		margin-left:3%;
+	    display: flex;
+	    align-items: center;
+	}
+	.chatgroup-time-right{
+	    margin-left: 55%;
+	    display: flex;
+	    align-items: center;
+	}
+	
+	
+    .container {
+          margin-top: 0.2vh;
+   	  width: 50%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+    }
+
+    .card {
+    	    cursor: pointer;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .card-content h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .card-content p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: #666;
+       overflow: hidden;
+	 text-overflow: ellipsis;
+	 white-space: nowrap;
+	 width: 13vw;
+    }
+    
+    
+    
+    .chatgroup-item {
+	    position: relative; /* 相对定位，方便子元素定位 */
+	    padding: 10px;
+	    margin-bottom: 5px;
+	    cursor: pointer;
+	    transition: background-color 0.3s ease; /* 添加悬浮过渡效果 */
+	}
+	
+	.chatgroup-item:hover {
+	    background-color: #f9f9f9; /* 悬浮时背景色变化 */
+	}
+	
+	.delete-btn {
+	    display: none; /* 默认隐藏删除按钮 */
+	    position: absolute; /* 绝对定位 */
+	    right: 0px; /* 距离右侧 10px */
+	    top: 50%; /* 垂直居中 */
+	    transform: translateY(-50%); /* 垂直居中 */
+	    color: #ff4d4d; /* 符号颜色 */
+	    cursor: pointer;
+	    font-size: 16px; /* 符号大小 */
+	}
+		
+	  .chatgroup-item:hover{
+	  	background-color: #eee;
+	  	border-radius: 1vh;
+	  }
+	.chatgroup-item:hover .delete-btn {
+	    display: block; /* 悬浮时显示删除按钮 */
+	}
+	
+	
+	    /* 按钮通用样式 */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      background-color: white;
+      padding: 10px;
+    }
+    
+    .checkbtn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+      background-color: white;
+      color: black;
+      font-family: '黑体', sans-serif;
+      font-size: 14px;
+      border: 1px solid rgba(0, 0, 0, .2);
+      border-radius: 12px;
+    }
+     /* 选中按钮的样式 */
+    .checkbtn.active {
+	  background-color: #333;
+	  color: white;
+	}
+	.chat-box-card{
+		overflow-y: auto; 
+	  	padding: 1vh;
+	  	height: 45vh; 
+  	    overflow-x: hidden;
+	    padding-top: 0px;
+	
+	}
+	.container_hidden{
+		display:none;
+	}
+	.container_show{
+		display:block;
+	}
+  /* 定义旋转动画 */
+     @keyframes spin {
+         from {
+             transform: rotate(0deg);
+         }
+         to {
+             transform: rotate(360deg);
+         }
+     }
+
+     /* 应用动画到图片 */
+     .rotating-image {
+         animation: spin 0.5s linear infinite;
+     }

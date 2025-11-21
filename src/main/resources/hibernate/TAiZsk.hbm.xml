@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.pfw.framework.aichat.domain.TAiZsk" table="T_ai_zsk">
+        <comment>ai知识库</comment>
+        
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="64" />
+            <generator class="uuid.hex" />
+        </id>
+       
+        <property name="zskmc" type="java.lang.String">
+            <column name="zskmc" length="100">
+                <comment>知识库名称</comment>
+            </column>
+        </property>
+        
+        <property name="zskdm" type="java.lang.String">
+            <column name="zskdm" length="100">
+                <comment>知识库代码</comment>
+            </column>
+        </property>
+        
+        <property name="sxh" type="java.lang.Double">
+            <column name="sxh" length="10">
+                <comment>顺序号</comment>
+            </column>
+        </property>
+        
+        <property name="zskms" type="java.lang.String">
+            <column name="zskms" length="500">
+                <comment>知识库描述</comment>
+            </column>
+        </property>
+        
+		<many-to-one name="czr" class="org.pfw.framework.domain.security.User">
+			<column name="czr" length="64">
+				<comment>操作人</comment>
+			</column>
+		</many-to-one>
+		
+        <property name="czsj" type="java.lang.String">
+            <column name="czsj" length="30">
+                <comment>操作时间</comment>
+            </column>
+        </property>
+		
+        <property name="sfyx" type="java.lang.String">
+            <column name="sfyx" length="1">
+                <comment>是否有效</comment>
+            </column>
+        </property>
+        
+       
+    </class>
+</hibernate-mapping>

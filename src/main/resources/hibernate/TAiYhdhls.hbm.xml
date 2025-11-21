@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.pfw.framework.aichat.domain.TAiYhdhls" table="T_ai_yhdhls">
+        <comment>用户ai对话历史</comment>
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="64" />
+            <generator class="uuid.hex" />
+        </id>
+         
+        <many-to-one name="ssznt" class="org.pfw.framework.aichat.domain.TAiZnt" fetch="select">
+            <column name="ssznt" length="64">
+                <comment>所属智能体</comment>
+            </column>
+        </many-to-one>
+        
+        <property name="biaot" type="java.lang.String">
+            <column name="biaot" length="100">
+                <comment>标题</comment>
+            </column>
+        </property>
+        
+		<many-to-one name="czr" class="org.pfw.framework.domain.security.User">
+			<column name="czr" length="64">
+				<comment>操作人</comment>
+			</column>
+		</many-to-one>
+		
+		<property name="czsj" type="java.lang.String">
+			<column name="czsj" length="30">
+				<comment>操作时间</comment>
+			</column>
+		</property>
+        
+        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-2.5.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-2.5.xsd   
+    http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	"
+	default-lazy-init="true">
+
+	<description>Spring公共配置 </description>
+
+
+	<aop:aspectj-autoproxy />
+	
+	<bean id="lhd" class="org.pfw.framework.core.log.LogHandler" />
+	<!--  
+    <aop:config>  
+        <aop:pointcut id="sav"  expression="execution(* org.pfw.framework..*.*ServiceImpl.save*(..))" />  
+        <aop:pointcut id="del"  expression="execution(* org.pfw.framework..*.*ServiceImpl.delete*(..))" /> 
+        <aop:pointcut id="upd"  expression="execution(* org.pfw.framework..*.*ServiceImpl.update*(..))" /> 
+        <aop:aspect id="allMethod" ref="lhd">  
+            <aop:after method="AfterLogSave" pointcut-ref="sav" />  
+            <aop:after method="AfterLogDelete" pointcut-ref="del" />  
+            <aop:after method="AfterLogUpdate" pointcut-ref="upd" />  
+        </aop:aspect>  
+    </aop:config>   	
+	-->
+	
+	<!-- 定义受环境影响易变的变量 -->
+	<bean class="org.apache.struts2.util.JdbcDecryptPropertiesFile">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<!-- 标准配置 -->
+				<value>classpath*:/spring/application.properties</value>
+				<value>classpath:/spring/applicationContext.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!--  
+	<context:component-scan base-package="org.springframework.security" />
+	-->
+	<!--<import resource="classpath*:/bean/spring.xml"/>-->
+	
+	<!--<import resource="classpath*:/bean/spring.xml"/>-->
+	<context:component-scan base-package="org.pfw.framework" />
+	
+	<!-- 数据源配置,使用应用内的DBCP数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		
+		<property name="initialSize" value="50" />
+		<!-- 最大有效的数据库连接数 -->
+		<property name="maxActive" value="500" />
+		<!-- 最大空闲的数据库连接数 -->
+		<property name="maxIdle" value="50" />
+		<!-- 数据库连接最大可空闲时间（以毫秒为单位，设为-1则关    闭） -->
+		<property name="maxWait" value="60000" />
+		<!-- 当连接池的连接耗尽时的对策，为0则不予响应，为1则阻   塞 直到有可用的连接，为2则新增加一个连接 
+    	<property name="whenExhaustedAction" value="1"></property>
+    	-->
+		
+		<property name="poolPreparedStatements" value="false" />
+		<property name="defaultAutoCommit" value="false" />
+		<property name="testOnBorrow" value="true"></property>
+    	<property name="validationQuery" value="SELECT 1"></property>
+    	
+	</bean>
+	<!-- 数据源配置,使用应用服务器的数据库连接池 -->
+	<!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/pfw"/> -->
+	
+	<!-- 定时间任务配置 -->
+		<bean id="userJob"  
+	          class="org.pfw.framework.xtgl.job.UserJob">  
+	    </bean>  
+	      
+	    <bean id="userJobJob"  
+	          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+	          <property name="targetObject" ref="userJob"></property>  
+	          <property name="targetMethod" value="ywtxsc"></property>  
+	          <property name="concurrent" value="false"></property>  
+	    </bean>  
+	      
+	    <!-- 调用触发器trigger -->  
+	    <bean id="userJobTrigger"  
+	          class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	          <property name="jobDetail" ref="userJobJob"></property>  
+	          <property name="cronExpression">  
+	          	<!-- 每1小时执行一次 -->
+	            <value>0 0 0/1 * * ?</value>   
+	          </property>   
+	    </bean>
+	    <!-- 调度工厂  -->  
+	    <bean id="xxxx_jobScheduler2"  
+	        class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+	        <property name="triggers">  
+	            <list>  
+	            	<!--
+	                <ref bean="userJobTrigger" />
+	                -->  
+	            </list>  
+	        </property>  
+	        <!--  property name="startupDelay" value="5"></property-->  
+	    </bean>
+    <!-- 定时间任务配置 -->
+	
+	<!-- Hibernate配置 -->
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" />
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!--自动命名-->
+		<!--<property name="namingStrategy">
+			<bean class="org.hibernate.cfg.ImprovedNamingStrategy" />
+		</property>-->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				
+				<!-- 如果数据库是oracle必须加上 
+				<prop key="hibernate.default_schema">${hibernate.default_schema}</prop>
+				-->
+				<!-- 是否使用查询缓存 -->
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				
+				<prop key="hibernate.max_fetch_depth">3</prop>
+
+				<!--mysql-->
+				<!--<prop key="connection.useUnicode">false</prop>-->
+				<!--<prop key="connection.characterEncoding">UTF-8</prop>--> 
+		
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.cache.provider_configuration_file_resource_path">${hibernate.ehcache_config_file}</prop>
+			</props>
+		</property>
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+		<!-- 动态加载所有指定路径下的文件-->
+		<property name="mappingLocations" value="classpath*:hibernate/**/*.hbm.xml"/>
+
+		<property name="eventListeners">
+            <map>
+                <!--<entry key="pre-load">
+					<list>
+						<bean class="org.pfw.framework.hibernate.PreLoaEventListener">
+							<property name="jdbcTemplate" ref="jdbcTemplate"/>
+						</bean>
+						<bean class="org.hibernate.event.def.DefaultPreLoadEventListener" />
+					</list>
+				</entry>-->
+                <!--<entry key="load-collection">
+					<list>
+						<bean class="org.pfw.framework.hibernate.InitializeCollectionEventListener">
+							<property name="jdbcTemplate" ref="jdbcTemplate"/>
+						</bean>
+						<bean class="org.hibernate.event.def.DefaultInitializeCollectionEventListener" />
+					</list>
+				</entry>-->
+                <!--<entry key="save-update">
+					<list>
+						<bean class="org.pfw.framework.hibernate.SaveOrUpdateEventListener">
+							<property name="jdbcTemplate" ref="jdbcTemplate"/>
+						</bean>
+						<bean class="org.hibernate.event.def.DefaultSaveOrUpdateEventListener" />
+					</list>
+				</entry>-->
+			<!--
+				eventInterfaceFromType.put("auto-flush", AutoFlushEventListener.class);
+                eventInterfaceFromType.put("merge", MergeEventListener.class);
+                eventInterfaceFromType.put("create", PersistEventListener.class);
+                eventInterfaceFromType.put("create-onflush", PersistEventListener.class);
+                eventInterfaceFromType.put("delete", DeleteEventListener.class);
+                eventInterfaceFromType.put("dirty-check", DirtyCheckEventListener.class);
+                eventInterfaceFromType.put("evict", EvictEventListener.class);
+                eventInterfaceFromType.put("flush", FlushEventListener.class);
+                eventInterfaceFromType.put("flush-entity", FlushEntityEventListener.class);
+                eventInterfaceFromType.put("load", LoadEventListener.class);
+                eventInterfaceFromType.put("load-collection", InitializeCollectionEventListener.class);
+                eventInterfaceFromType.put("lock", LockEventListener.class);
+                eventInterfaceFromType.put("refresh", RefreshEventListener.class);
+                eventInterfaceFromType.put("replicate", ReplicateEventListener.class);
+                eventInterfaceFromType.put("save-update", SaveOrUpdateEventListener.class);
+                eventInterfaceFromType.put("save", SaveOrUpdateEventListener.class);
+                eventInterfaceFromType.put("update", SaveOrUpdateEventListener.class);
+                eventInterfaceFromType.put("pre-load", PreLoadEventListener.class);
+                eventInterfaceFromType.put("pre-update", PreUpdateEventListener.class);
+                eventInterfaceFromType.put("pre-delete", PreDeleteEventListener.class);
+                eventInterfaceFromType.put("pre-insert", PreInsertEventListener.class);
+                eventInterfaceFromType.put("pre-collection-recreate", PreCollectionRecreateEventListener.class);
+                eventInterfaceFromType.put("pre-collection-remove", PreCollectionRemoveEventListener.class);
+                eventInterfaceFromType.put("pre-collection-update", PreCollectionUpdateEventListener.class);
+                eventInterfaceFromType.put("post-load", PostLoadEventListener.class);
+                eventInterfaceFromType.put("post-update", PostUpdateEventListener.class);
+                eventInterfaceFromType.put("post-delete", PostDeleteEventListener.class);
+                eventInterfaceFromType.put("post-insert", PostInsertEventListener.class);
+                eventInterfaceFromType.put("post-commit-update", PostUpdateEventListener.class);
+                eventInterfaceFromType.put("post-commit-delete", PostDeleteEventListener.class);
+                eventInterfaceFromType.put("post-commit-insert", PostInsertEventListener.class);
+                eventInterfaceFromType.put("post-collection-recreate", PostCollectionRecreateEventListener.class);
+                eventInterfaceFromType.put("post-collection-remove", PostCollectionRemoveEventListener.class);
+                eventInterfaceFromType.put("post-collection-update", PostCollectionUpdateEventListener.class);
+            -->
+            </map>
+        </property>
+		<property name="lobHandler" ref="lobHandler"/>
+	</bean>
+	
+	<!-- 事务管理器配置,单数据源事务 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	
+	
+	<bean id="txParent" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="transactionAttributes">
+			<props>
+	<!-- -Exception如果抛异常,事物回滚,+表示提交 -->
+	<!-- PROPAGATION_REQUIRED:支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择。 -->
+	<!-- PROPAGATION_SUPPORTS:支持当前事务，如果当前没有事务，就以非事务方式执行。 -->
+	<!-- PROPAGATION_MANDATORY:支持当前事务，如果当前没有事务，就抛出异常。 -->
+	<!-- PROPAGATION_REQUIRES_NEW:新建事务，如果当前存在事务，把当前事务挂起。 -->
+	<!-- PROPAGATION_NOT_SUPPORTED:以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。 -->
+	<!-- PROPAGATION_NEVER:以非事务方式执行，如果当前存在事务，则抛出异常。 -->
+	<!-- PROPAGATION_NESTED:如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则进行与PROPAGATION_REQUIRED类似的操作。-->
+				<prop key="get*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="create*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>	
+	<bean id="hibernateTemplate"
+		class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+   
+   
+    <import resource="applicationContext-ehcache.xml"/>
+    <import resource="pfw-bean.xml"/>
+    <import resource="jcaptcha.xml"/>
+    <import resource="classpath*:spring/bean.xml"/>
+    
+    
+</beans>

@@ -1,0 +1,64 @@
+.more{
+	position: absolute;
+    right: 1vw;
+    top: 0;
+    padding-right: 0.78vw;
+    background: url(../images/more.png) right center no-repeat;
+    font-size: 0.6vw;
+    font-family: "Microsoft YaHei";
+    color: #98b2d3;
+}
+.portlet-title a:hover{
+	color: #98b2d3;
+}
+.icon-banner1:before{
+	content: "\f180";
+	margin:5px;
+}
+.icon-banner2:before{
+	content: "\f157";
+	margin: 6px 0px 6px 8px;
+}
+.icon-banner3:before{
+	content: "\f024";
+	margin: 6px 0px 6px 8px;
+}
+.dashboard-monitor-base-info-number {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 8px 0px 4px;
+    text-align: center;
+    padding: 20px 0px;
+    color: #515a6e;
+}
+.dashboard-monitor-base-info-desc {
+    color: rgb(128, 134, 149);
+    font-size: 12px;
+    text-align: center;
+    padding: 10px 0px;
+}
+.wkp-div{
+	box-shadow: 5px 5px 5px #ddd;
+	background-color: #fff;
+	border-radius: 4px !important;
+}
+.wkp-div-sumicon{
+	width: 24px;
+	border-radius: 20px !important;
+	height: 24px;margin: 0 auto;
+}
+.wkp-div-sumicon-color1
+{
+	color: rgb(64, 169, 255);
+	background-color: rgb(230, 247, 255);
+}
+.wkp-div-sumicon-color2
+{
+	color: rgb(146, 84, 222);
+	background-color: rgb(249, 240, 255);
+}
+.wkp-div-sumicon-color3
+{
+	color: rgb(115, 209, 61);
+	background-color: rgb(246, 255, 237);
+}

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.pfw.framework.aichat.domain.TAiWdxx" table="T_ai_wdxx">
+        <comment>ai知识库文档</comment>
+        
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="64" />
+            <generator class="uuid.hex" />
+        </id>
+       
+        <many-to-one name="sszsk" class="org.pfw.framework.aichat.domain.TAiZsk" fetch="select">
+            <column name="sszsk" length="64">
+                <comment>所属知识库</comment>
+            </column>
+        </many-to-one>
+       
+        <property name="laiy" type="java.lang.String">
+            <column name="laiy" length="1">
+                <comment>来源 1：录入  2：上传</comment>
+            </column>
+        </property>
+       
+        <property name="fjwjmName" type="java.lang.String">
+            <column name="fjwjmName" length="1000">
+                <comment>文件名称</comment>
+            </column>
+        </property>
+        
+        <property name="fjwjmPath" type="java.lang.String">
+            <column name="fjwjmPath" length="1000">
+                <comment>文件路径</comment>
+            </column>
+        </property>
+        
+        <property name="mc" type="java.lang.String">
+            <column name="mc" length="1000">
+                <comment>名称</comment>
+            </column>
+        </property>
+        
+        <property name="wjlx" type="java.lang.String">
+            <column name="wjlx" length="100">
+                <comment>文件类型</comment>
+            </column>
+        </property> 
+        
+        <property name="wjnr" type="text">
+            <column name="wjnr" sql-type="TEXT">
+                <comment>文件内容</comment>
+            </column>
+        </property>
+       
+        <property name="czsj" type="java.lang.String">
+            <column name="czsj" length="30">
+                <comment>操作时间</comment>
+            </column>
+        </property>
+        
+        <many-to-one name="czr" class="org.pfw.framework.domain.security.User">
+			<column name="czr" length="64">
+				<comment>操作人</comment>
+			</column>
+		</many-to-one>
+       
+        <property name="qpzt" type="java.lang.String">
+            <column name="qpzt" length="1">
+                <comment>切片状态 0:失败  1；未切片  2：已切片 </comment>
+            </column>
+        </property>
+       
+        <many-to-one name="ssdhjg" class="org.pfw.framework.aichat.domain.TAiYhdhjg" fetch="select">
+            <column name="ssdhjg" length="64">
+                <comment>所属对话结果</comment>
+            </column>
+        </many-to-one>
+        
+        <property name="beiz" type="java.lang.String">
+            <column name="beiz" length="200">
+                <comment>备注</comment>
+            </column>
+        </property>
+        
+    </class>
+</hibernate-mapping>

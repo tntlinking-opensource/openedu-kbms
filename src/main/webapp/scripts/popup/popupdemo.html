@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>popup</title>
+ 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="popup.js"></script>
+ 
+    <script type="text/javascript">
+    
+	    function ShowIframe()
+		{
+            var pop=new Popup({ contentType:1,scrollType:'yes',isReloadOnClose:false,width:500,height:400});
+            pop.setContent("contentUrl","http://www.jb51.net");
+            pop.setContent("title","iframe框架示例");
+            pop.build();
+            pop.show();
+        }
+        function ShowHtmlString()
+        {
+            var strHtml = "<table border=1 style='width:90%; text-align:center;'><tr style='height:40px'><td>ds</td><td>dads</td></tr><tr style='height:40px'><td>dadas</td><td>dasd</td></tr><tr style='height:40px'><td>dadasd</td><td>dsadads</td></tr></table>";
+            var pop=new Popup({ contentType:2,isReloadOnClose:false,width:340,height:300});
+            pop.setContent("contentHtml",strHtml);
+            pop.setContent("title","html字符串示例");
+            pop.build();
+            pop.show();
+       }
+        function ShowConfirm()
+        {
+           var pop=new Popup({ contentType:3,isReloadOnClose:true,width:340,height:80});
+           pop.setContent("title","confirm对话框示例");
+           pop.setContent("confirmCon","confirm对话框的内容");
+           pop.setContent("callBack",ShowCallBack);
+           pop.setContent("parameter",{id:"divCall",str:"点击确定后显示的字符串",obj:pop});
+           pop.build();
+           pop.show();
+        }
+        function ShowAlert()
+        {
+            var pop=new Popup({ contentType:4,isReloadOnClose:false,width:340,height:80});
+            pop.setContent("title","alert警告框示例");
+            pop.setContent("alertCon","alert对话框的内容");
+            pop.build();
+            pop.show();
+        }
+        
+        
+        function ShowCallBack(para)
+        {
+            var o_pop = para["obj"]
+            var obj = document.getElementById(para["id"]);
+            o_pop.close();
+            obj.innerHTML = para["str"];
+            
+        }
+         
+   </script>
+ 
+<style type="text/css"> 
+<!--
+body {
+	background-color: #FFFFFF;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	height:100%;
+}
+-->
+</style></head>
+<body style="text-align:center;">
+    <form id="form1" runat="server">
+        <div>
+            <a href="javascript:ShowIframe()">iframe框架示例</a>
+            <br />
+            <a href="javascript:ShowHtmlString()">html字符串示例</a>
+            <br />
+            <a href="javascript:ShowConfirm()">confirm对话框示例</a>
+            <br />
+            <a href="javascript:ShowAlert()">alert警告框示例</a>
+       </div>
+       <div id="divCall" style="width:300px; height:200px; background-color:#cccccc; color:Red; float:right;">
+        </div>
+ </form>
+</body>
+</html>
+

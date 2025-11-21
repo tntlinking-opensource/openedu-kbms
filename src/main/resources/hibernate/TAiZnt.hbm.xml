@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.pfw.framework.aichat.domain.TAiZnt" table="T_ai_znt">
+        <comment>ai智能体</comment>
+        
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="64" />
+            <generator class="uuid.hex" />
+        </id>
+       
+        <property name="zntmc" type="java.lang.String">
+            <column name="zntmc" length="100">
+                <comment>名称</comment>
+            </column>
+        </property>
+        
+        <property name="zntdm" type="java.lang.String">
+            <column name="zntdm" length="50">
+                <comment>代码</comment>
+            </column>
+        </property>
+        
+        <property name="fbt" type="java.lang.String">
+            <column name="fbt" length="100">
+                <comment>副标题</comment>
+            </column>
+        </property>
+        
+        <set name="roleSet" table="t_ai_znt_role" fetch="subselect"  lazy="false">
+		    <comment>资料库，角色中间表</comment>
+		    <key>
+		        <column name="zykid"><comment>应用id</comment></column>
+		    </key>
+		    <many-to-many class="org.pfw.framework.domain.security.Role">
+		        <column name="roleid"><comment>角色id</comment></column>
+		    </many-to-many>
+		</set>
+        
+        <set name="zskSet" table="T_ai_znt_zsk" fetch="subselect"  lazy="false">
+		    <comment>智能体、知识库表</comment>
+		    <key>
+		        <column name="zntid"><comment>智能体id</comment></column>
+		    </key>
+		    <many-to-many class="org.pfw.framework.aichat.domain.TAiZsk">
+		        <column name="zskid"><comment>知识库id</comment></column>
+		    </many-to-many>
+		</set>
+        
+        <property name="promptWords" type="text">
+            <column name="promptWords" sql-type="TEXT">
+                <comment>提示词</comment>
+            </column>
+        </property>
+        
+        <property name="source" type="java.lang.Double">
+            <column name="source" length="10">
+                <comment>精准度</comment>
+            </column>
+        </property>
+        
+        <property name="dldhs" type="java.lang.Integer">
+            <column name="dldhs" length="10">
+                <comment>多轮对话数</comment>
+            </column>
+        </property>
+        
+		<many-to-one name="ssfl" class="org.pfw.framework.xtgl.domain.Dict">
+			<column name="ssfl" length="64">
+				<comment>所属分类</comment>
+			</column>
+		</many-to-one>
+		
+        <property name="tupianName" type="java.lang.String">
+            <column name="tupianName" length="500">
+                <comment>图标名称</comment>
+            </column>
+        </property>
+        
+        <property name="tupianPath" type="java.lang.String">
+            <column name="tupianPath" length="500">
+                <comment>图标路径</comment>
+            </column>
+        </property>
+        
+        <property name="usermaxTokens" type="java.lang.Integer">
+            <column name="usermaxTokens" length="10">
+                <comment>用户提问最大tokens</comment>
+            </column>
+        </property>
+        
+        <property name="aimaxTokens" type="java.lang.Integer">
+            <column name="aimaxTokens" length="10">
+                <comment>ai回答最大tokens</comment>
+            </column>
+        </property>
+        
+        <property name="jies" type="java.lang.String">
+            <column name="jies" length="500">
+                <comment>介绍</comment>
+            </column>
+        </property>
+        
+        <property name="sftj" type="java.lang.String">
+            <column name="sftj" length="1">
+                <comment>是否推荐</comment>
+            </column>
+        </property>
+        
+        <property name="sfmrznt" type="java.lang.String">
+            <column name="sfmrznt" length="1">
+                <comment>是否默认智能体</comment>
+            </column>
+        </property>
+        
+        <property name="sxh" type="java.lang.Double">
+            <column name="sxh" length="10">
+                <comment>顺序号</comment>
+            </column>
+        </property>
+        
+        <property name="sfyx" type="java.lang.String">
+            <column name="sfyx" length="1">
+                <comment>是否有效</comment>
+            </column>
+        </property>
+       
+    </class>
+</hibernate-mapping>

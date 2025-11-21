@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.pfw.framework.aichat.domain.TAiHsgl" table="T_ai_hsgl">
+        <comment>函数管理</comment>
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="64" />
+            <generator class="uuid.hex" />
+        </id>
+        
+		<set name="zskSet" table="T_ai_hs_zsk" fetch="subselect"  lazy="false">
+		    <comment>函数、知识库表</comment>
+		    <key>
+		        <column name="zntid"><comment>智能体id</comment></column>
+		    </key>
+		    <many-to-many class="org.pfw.framework.aichat.domain.TAiZsk">
+		        <column name="zskid"><comment>知识库id</comment></column>
+		    </many-to-many>
+		</set>
+		
+        <property name="name" type="java.lang.String">
+            <column name="name" length="100">
+                <comment>函数名称</comment>
+            </column>
+        </property> 
+        
+        <property name="description" type="java.lang.String">
+            <column name="description" length="100">
+                <comment>函数描述</comment>
+            </column>
+        </property>
+        
+        <property name="apiurl" type="java.lang.String">
+            <column name="apiurl" length="500">
+                <comment>回调api （动态参数使用${loginName}）</comment>
+            </column>
+        </property>
+        
+        <property name="callbkmb" type="java.lang.String">
+            <column name="callbkmb" length="2000">
+                <comment>回调信息模板</comment>
+            </column>
+        </property>
+        
+		<many-to-one name="czr" class="org.pfw.framework.domain.security.User">
+			<column name="czr" length="64">
+				<comment>操作人</comment>
+			</column>
+		</many-to-one>
+		
+		<property name="czsj" type="java.lang.String">
+			<column name="czsj" length="30">
+				<comment>操作时间</comment>
+			</column>
+		</property>
+        
+        <property name="count" type="java.lang.Integer">
+            <column name="count" length="20">
+                <comment>调用次数</comment>
+            </column>
+        </property>
+        
+        <set name="roleSet" table="T_ai_hsgl_role" fetch="subselect"  lazy="false">
+		    <comment>系统服务，角色中间表</comment>
+		    <key>
+		        <column name="hsid"><comment>函数id</comment></column>
+		    </key>
+		    <many-to-many class="org.pfw.framework.domain.security.Role">
+		        <column name="roleid"><comment>角色id</comment></column>
+		    </many-to-many>
+		</set>
+        
+		<property name="sfyx" type="java.lang.String">
+			<column name="sfyx" length="1">
+				<comment>是否有效  0：否  1：是 </comment>
+			</column>
+		</property>
+        
+        <property name="beiz" type="java.lang.String">
+            <column name="beiz" length="300">
+                <comment>备注</comment>
+            </column>
+        </property>
+        
+    </class>
+</hibernate-mapping>

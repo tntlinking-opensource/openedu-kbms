@@ -1,0 +1,96 @@
+BODY {
+	BACKGROUND-COLOR: #fff; FONT-SIZE: 12px
+}
+.email {
+	WIDTH: 100%
+}
+.email A {
+	COLOR: #333; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+.email A:hover {
+	TEXT-DECORATION: underline
+}
+.left {
+	BORDER-BOTTOM: #6a716e 1px solid; BORDER-LEFT: #6a716e 1px solid; PADDING-BOTTOM: 10px; LINE-HEIGHT: 1.6; PADDING-LEFT: 10px; WIDTH: 180px; PADDING-RIGHT: 10px; HEIGHT: 280px; FONT-SIZE: 12px; OVERFLOW: auto; BORDER-TOP: #6a716e 1px solid; BORDER-RIGHT: #6a716e 1px solid; PADDING-TOP: 10px
+}
+.right {
+	BORDER-BOTTOM: #6a716e 1px solid; BORDER-LEFT: #6a716e 1px solid; PADDING-BOTTOM: 10px; LINE-HEIGHT: 1.6; PADDING-LEFT: 10px; WIDTH: 180px; PADDING-RIGHT: 10px; HEIGHT: 280px; FONT-SIZE: 12px; OVERFLOW: auto; BORDER-TOP: #6a716e 1px solid; BORDER-RIGHT: #6a716e 1px solid; PADDING-TOP: 10px
+}
+.info {
+	CURSOR: pointer
+}
+.groupclose {
+	CURSOR: pointer
+}
+.left .groupclose {
+	LINE-HEIGHT: 20px; HEIGHT: 20px; CURSOR: pointer
+}
+.left.info {
+	LINE-HEIGHT: 20px; HEIGHT: 20px; CURSOR: pointer
+}
+right DIV {
+	LINE-HEIGHT: 20px; HEIGHT: 20px; CURSOR: pointer
+}
+.lxr.info {
+	LINE-HEIGHT: 20px; HEIGHT: 20px; CURSOR: pointer
+}
+.lxr.groupclose {
+	LINE-HEIGHT: 20px; HEIGHT: 20px; CURSOR: pointer
+}
+.groupclose {
+	DISPLAY: block; FONT-WEIGHT: bold
+}
+.groupcloselm_ico {
+	PADDING-BOTTOM: 0px; BORDER-RIGHT-WIDTH: 0px; MARGIN: 2px 1px 0px 2px; PADDING-LEFT: 0px; WIDTH: 14px; PADDING-RIGHT: 0px; BACKGROUND: url(compose0154f8.gif) no-repeat -64px -16px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; HEIGHT: 12px; VERTICAL-ALIGN: middle; BORDER-LEFT-WIDTH: 0px; PADDING-TOP: 0px
+}
+.groupopenlm_ico {
+	PADDING-BOTTOM: 0px; BORDER-RIGHT-WIDTH: 0px; MARGIN: 2px 1px 0px 2px; PADDING-LEFT: 0px; WIDTH: 14px; PADDING-RIGHT: 0px; BACKGROUND: url(compose0154f8.gif) no-repeat -80px -16px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; HEIGHT: 12px; VERTICAL-ALIGN: middle; BORDER-LEFT-WIDTH: 0px; PADDING-TOP: 0px
+}
+#dialog A {
+	TEXT-DECORATION: none; nocheck: true
+}
+.groupSub DIV {
+	PADDING-LEFT: 20px
+}
+.groupSub {
+	DISPLAY: none
+}
+.mov {
+	BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; WIDTH: 16px; BORDER-TOP-STYLE: none; BACKGROUND: url(bot_mov0b3dfa.gif) no-repeat; FLOAT: right; BORDER-LEFT-STYLE: none
+}
+.divtxt {
+	BORDER-BOTTOM: #e5e5e5 1px solid; BORDER-LEFT: #e5e5e5 1px solid; PADDING-BOTTOM: 3px; LINE-HEIGHT: 16px; BACKGROUND-COLOR: #fff; MIN-HEIGHT: 16px; PADDING-LEFT: 3px; WIDTH: 100%; PADDING-RIGHT: 3px; FONT-SIZE: 16px; font-family:"FangSong", "FangSong_GB2312", Serif; OVERFLOW: auto; BORDER-TOP: #e5e5e5 1px solid; CURSOR: text; BORDER-RIGHT: #e5e5e5 1px solid; PADDING-TOP: 3px;height:40px;
+}
+.divtxt .one {
+	WHITE-SPACE: nowrap; FLOAT: left; HEIGHT: 20px
+}
+.divtxt .one B {
+	FONT-WEIGHT: 300
+}
+.divtxt .one.select {
+	BACKGROUND-COLOR: #1E90FF; COLOR: #fff
+}
+.divtxt .one.over {
+	BACKGROUND-COLOR: #e5e5e5
+}
+.divtxt INPUT {
+	PADDING-BOTTOM: 0px; BORDER-RIGHT-WIDTH: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; PADDING-TOP: 0px
+}
+.hd {
+	DISPLAY: none
+}
+.lxr {
+	LINE-HEIGHT: 20px; BACKGROUND-COLOR: #fff; MARGIN: 0px 10px; HEIGHT: 500px; FONT-SIZE: 20px; OVERFLOW: auto
+}
+.lxr .tt {
+	BORDER-BOTTOM: #e5e5e5 1px solid; PADDING-BOTTOM: 2px; BACKGROUND-COLOR: #E9F2F6; PADDING-LEFT: 8px; PADDING-RIGHT: 0px; MARGIN-BOTTOM: 6px; PADDING-TOP: 4px;height:40px;
+}
+#lxr {
+	BORDER: #e5e5e5 1px solid;
+}
+#inputEmail {
+	HEIGHT: 15px
+}
+textarea {
+	BORDER: #e5e5e5 1px solid;
+}

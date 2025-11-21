@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.pfw.framework.aichat.domain.TAiQpjg" table="T_ai_qpjg">
+        <comment>切片结果</comment>
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="64" />
+            <generator class="uuid.hex" />
+        </id>
+        <many-to-one name="sswdxx" class="org.pfw.framework.aichat.domain.TAiWdxx" fetch="select">
+            <column name="sswdxx" length="64">
+                <comment>所属文档信息</comment>
+            </column>
+        </many-to-one>
+        
+        <property name="biaot" type="java.lang.String">
+            <column name="biaot" length="200">
+                <comment>标题</comment>
+            </column>
+        </property>
+         
+        <property name="qpid" type="java.lang.String">
+            <column name="qpid" length="500">
+                <comment>切片id</comment>
+            </column>
+        </property>
+         
+        <property name="qpnr" type="text">
+            <column name="qpnr" sql-type="TEXT">
+                <comment>切片内容（以2000字符进行切割）</comment>
+            </column>
+        </property>
+         
+        <property name="tokens" type="java.lang.Integer">
+            <column name="tokens" length="10">
+                <comment>字符数</comment>
+            </column>
+        </property>
+         
+        
+        <property name="sfxl" type="java.lang.String">
+            <column name="sfxl" length="1">
+                <comment>是否训练 0否 1 是</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

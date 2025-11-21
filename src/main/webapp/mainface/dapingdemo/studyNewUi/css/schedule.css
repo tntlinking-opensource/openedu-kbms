@@ -1,0 +1,139 @@
+.schedule-top {
+	padding: 0 0.5vw;
+}
+.schedule-hd {
+	position: relative;
+	display: flex;
+	/*margin-bottom: 0.5vw;*/
+	padding: 0 0.5vw;
+	height: 2vw;
+	line-height: 2vw;
+}
+
+.today {
+	margin: 0 1vw;
+	font-size: 1vw;
+    font-family: "Microsoft YaHei";
+    color: rgb(41, 142, 236);
+    font-weight: bold;
+}
+.ul-box>li {
+	float: left;
+	width: 14.28%;
+	text-align: center;
+	line-height: 1.5vw;
+	font-family: "Microsoft YaHei";
+	color: #adadad;
+	position: relative;
+    padding: 1vh 0;
+    font-size: 1vw;
+}
+
+
+#schedule-Setup .ul-box>li,
+#schedule-Setup2 .ul-box>li,
+#schedule-Setup3 .ul-box>li {
+	font-size: 0.7vw;
+}
+
+#schedule-Setup .schedule-hd,
+#schedule-Setup2 .schedule-hd,
+#schedule-Setup3 .schedule-hd {
+	display: none;
+}
+
+
+/*.other-month {
+	color: #c7c7c7;
+}
+
+.current-month {
+	position: relative;
+	color: #000;
+}*/
+
+.arrow {
+	display: inline-block;
+	cursor: pointer;
+	width: 2vw;
+	height: 2vw;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 0.5vw 0.8vw;
+}
+#prevMonth {
+	background-image: url(../images/bstd/date-l.png)
+}
+#nextMonth {
+	background-image: url(../images/bstd/date-r.png)
+}
+.dayStyle {
+	display: inline-block;
+	width: 1.5vw;
+	height: 1.5vw;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 1.5vw;
+	font-size: 0.8vw;
+	color: #000;
+	cursor: default;
+    font-size: 1vw;
+}
+.schedule-bottom {
+	margin-top: 0.2vw;
+	padding: 0 1vw;
+	height: 3.2vw;
+	overflow-y:auto;
+}
+.other-month .dayStyle{
+	color: #c7c7c7 !important;
+}
+.schedule-ul {
+	
+}
+.schedule-ul>li {
+	height: 1.5vw;
+	line-height: 1.5vw;
+}
+.schedule-ul>li>span {
+	display: inline-block;
+	margin-right: 0.2vw;
+	width: 2.4vw;
+  	height: 0.8vw;
+  	text-align: center;
+  	line-height: 0.8vw;
+  	border-radius: 3px;
+  	vertical-align: middle;
+  	background: #ebebeb;
+	font-size: 0.5vw;
+	font-family: "Microsoft YaHei";
+	color: #666;
+}
+.schedule-ul>li>span.wait{
+	background: #fddcd7;
+	color: #ec4029;
+}
+.schedule-ul>li>a {
+	display: inline-block;
+	max-width: calc(100% - 5vw);
+	font-size: 0.8vw;
+	font-family: "Microsoft YaHei";
+	color: #000;
+	height: 1.5vw;
+	line-height: 1.5vw;
+	vertical-align: middle;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.add-wite {
+	position: absolute;
+    right: 1vw;
+    top: 0.2vw;
+}
+.add-wite>img {
+	width: 1vw;
+	height: 1vw;
+}
+
+

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:s="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
+	default-autowire="byType" default-lazy-init="true">
+
+	<description>SpringSecurity安全配置</description>
+
+	<!-- cas config start c8837b23ff8aaa8a2dde915473ce0991=(md5)pthinkcaskey -->
+	<!-- 启用以下注解，在http标签中加入cas入口属性entry-point-ref="casProcessingFilterEntryPoint" -->
+	<!-- 去除原登录入口标签s:form-login，更改原登出地址到cas服务器 -->
+	
+	<bean id="httpSessionContextIntegrationFilter" class="org.springframework.security.context.HttpSessionContextIntegrationFilter">
+		<property name="forceEagerSessionCreation">
+			<value>true</value>
+		</property>
+	</bean>
+	<!--bean id="casProcessingFilterEntryPoint"
+		class="org.springframework.security.ui.cas.CasProcessingFilterEntryPoint">
+		<property name="loginUrl" value="${cas.server.host}/login" />
+		<property name="serviceProperties" ref="serviceProperties" />
+	</bean>
+	<bean id="serviceProperties" class="org.springframework.security.ui.cas.ServiceProperties">
+		<property name="service" value="${cas.service.host}/j_spring_cas_security_check" />
+		<property name="sendRenew" value="false" />
+	</bean>
+	<bean id="casProcessingFilter" class="org.springframework.security.ui.cas.CasProcessingFilter">
+		<s:custom-filter after="CAS_PROCESSING_FILTER" />
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="authenticationFailureUrl" value="/error.jsp" />
+		<property name="defaultTargetUrl" value="/" />
+	</bean>
+	<bean id="casAuthenticationProvider"
+		class="org.springframework.security.providers.cas.CasAuthenticationProvider">
+		<s:custom-authentication-provider />
+		<property name="userDetailsService" ref="userDetailsService" />
+		<property name="serviceProperties" ref="serviceProperties" />
+		<property name="ticketValidator">
+			<bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
+				<constructor-arg index="0" value="${cas.server.host}" />
+			</bean>
+		</property>
+		<property name="key" value="c8837b23ff8aaa8a2dde915473ce0991" />
+	</bean-->
+	<!-- cas config end -->
+
+	<s:authentication-manager alias="authenticationManager" session-controller-ref="currentController"/>
+	<bean id="sessionRegistry"
+		class="org.springframework.security.concurrent.SessionRegistryImpl" />
+	<bean id="currentController" class="org.springframework.security.concurrent.ConcurrentSessionControllerImpl">
+		<property name="sessionRegistry" ref="sessionRegistry" />
+		<property name="exceptionIfMaximumExceeded" value="false" />
+		<property name="maximumSessions" value="-1" />
+	</bean>
+	<bean id="concurrentSessionFilter" class="org.springframework.security.concurrent.ConcurrentSessionFilter">
+		<s:custom-filter position="CONCURRENT_SESSION_FILTER" />
+		<property name="sessionRegistry" ref="sessionRegistry" />
+		<property name="expiredUrl" value="/common/expired.jsp" />
+		<property name="logoutHandlers">
+			<list>
+				<bean class="org.springframework.security.ui.logout.SecurityContextLogoutHandler" />
+				<bean class="org.springframework.security.ui.rememberme.TokenBasedRememberMeServices">
+					<property name="key" value="e37f4b31-0c45-11dd-bd0b-0800200c9a66" />
+					<property name="userDetailsService" ref="userDetailsService"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
+	<!--2011-2-1wlb:HttpSessionEventPublisher 参看 concurrent-session-control -->
+	<!--<s:authentication-manager alias="authenticationManager" session-controller-ref="concurrentSessionController"/>-->
+	<!--<bean id="concurrentSessionController"
+		class="org.springframework.security.concurrent.ConcurrentSessionControllerImpl">
+		<property name="maximumSessions" value="1"/>
+		<property name="sessionRegistry" ref="sessionRegistry"/>
+		</bean>-->
+
+	<!--<bean id="sessionRegistry" class="org.springframework.security.concurrent.SessionRegistryImpl"/>-->
+	<!-- http安全配置 -->
+	<!-- auto-config='true':启用匿名登录功能 -->
+	<!--防御会话伪造:session-fixation-protection="none" none，migrateSession和newSession:登录时销毁用户的当前session-->
+	<!-- when cas add:  entry-point-ref="casProcessingFilterEntryPoint" -->
+	<s:http auto-config="false"
+		access-decision-manager-ref="accessDecisionManager"
+		access-denied-page="/common/accessDenied.jsp"
+		>
+		<s:intercept-url pattern="/index.*" access="A_ANONYMOUS" />
+		<s:intercept-url pattern="/login*" filters="none" />
+
+		<s:intercept-url pattern="/macro/*" filters="none" />
+		<s:intercept-url pattern="/common/*" filters="none" />
+		<s:intercept-url pattern="/tags/*" filters="none" />
+		<s:intercept-url pattern="/css/**" filters="none" />
+		<s:intercept-url pattern="/images/**" filters="none" />
+		<s:intercept-url pattern="/jquery/**" filters="none" />
+		<s:intercept-url pattern="/scripts/**" filters="none" />
+		<s:intercept-url pattern="/schema/**" filters="none" />
+		<s:intercept-url pattern="/mainface/**" filters="none" />
+		<s:intercept-url pattern="/ueditor/**" filters="none" />
+		<s:intercept-url pattern="/page/**" filters="none" />
+		<s:intercept-url pattern="/userfiles/**" filters="none" />
+		<s:intercept-url pattern="/cms/cms_show**" filters="none" />
+		
+		<!-- web service -->
+		<s:intercept-url pattern="/pfwws/**" filters="none" />
+		
+		<!-- 模拟登录 -->
+		<s:intercept-url pattern="/DNSLogin.jsp" filters="none" />
+		
+		<!-- app调用http请求放行 -->
+		<s:intercept-url pattern="/security/user!jsontest.action**" filters="none" />
+		<s:intercept-url pattern="/app*.action**" filters="none" />
+		
+		<!-- cas集成改造 
+		<s:logout logout-success-url="${cas.server.host}/logout"/>
+		-->
+		
+		<!-- 不用cas集成时，打开注释 -->
+		<!-- cms  
+		<s:form-login login-page="/cms/cms_show!cmsShowInfo.action" default-target-url="/"
+			authentication-failure-url="/cms/cms_show!cmsShowInfo.action?loginerror=true" />
+		-->
+		
+		<!-- 本地登录 -->
+		<s:form-login login-page="/login.jsp" default-target-url="/" 
+			authentication-failure-url="/login.jsp?error=2" />
+		<s:logout logout-success-url="/" invalidate-session="true" />
+		
+		<!-- oauth集成配置 
+		<s:form-login login-page="/loginauth2.action" default-target-url="/index.jsp"
+			authentication-failure-url="/loginauth2.action?error=true" />	
+		<s:logout logout-success-url="/appsso!logout.action" invalidate-session="true" />
+		-->
+		
+		
+		<!-- cms
+		<s:logout logout-success-url="/cms/cms_show!cmsShowInfo.action?loginout=true" invalidate-session="true" />
+		-->
+
+		<s:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"
+			services-ref="rememberMeServices" />
+		<!--Spring Security 限制单个用户只能登录到你的程序一次 -->
+		<!--<s:concurrent-session-control max-sessions="1"/>-->
+		<!--防止一个用户重复登录好几次-第二次登录会让第一次登录失效。 通常我们更想防止第二次登录 -->
+		<!--<s:concurrent-session-control session-registry-ref="sessionRegistry" max-sessions="1" exception-if-maximum-exceeded="false"/>-->
+		<!--<s:concurrent-session-control max-sessions="1" session-registry-ref="sessionRegistry"
+			exception-if-maximum-exceeded="false"
+			expired-url="/common/expired.jsp" />-->
+
+		<!-- 本地登录 -->
+		<s:intercept-url pattern="/login.jsp"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+			
+		<!-- oauth集成配置
+		<s:intercept-url pattern="loginauth2.action"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		-->	
+		
+	</s:http>
+
+	<!-- 认证配置 -->
+	<s:authentication-provider user-service-ref="userDetailsService">
+		<!-- 可设置hash使用sha1或md5散列密码后再存入数据库 -->
+		<!--<s:password-encoder hash="plaintext" />-->
+		<s:password-encoder hash="md5" />
+	</s:authentication-provider>
+
+	<!-- 项目实现的用户查询服务 -->
+	<bean id="securityEntityManager"
+		class="org.pfw.framework.service.security.SecurityEntityManager">
+	</bean>
+
+	<bean id="userDetailsService"
+		class="org.pfw.framework.service.security.UserDetailsSecutrityManager">
+		<property name="securityEntityManager"
+			ref="securityEntityManager" />
+	</bean>
+
+	<!-- 授权判断配置, 将授权名称的默认前缀由ROLE_改为A_. -->
+	<bean id="accessDecisionManager"
+		class="org.springframework.security.vote.AffirmativeBased">
+		<property name="decisionVoters">
+			<list>
+				<bean
+					class="org.springframework.security.vote.RoleVoter">
+					<property name="rolePrefix" value="A_" />
+				</bean>
+				<bean
+					class="org.springframework.security.vote.AuthenticatedVoter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- DefinitionSource工厂,使用resourceDetailsService提供的URL-授权关系. -->
+	<bean id="databaseDefinitionSource"
+		class="org.pfw.framework.service.security.DefinitionSourceFactoryBean">
+		<property name="resourceDetailsService"
+			ref="resourceDetailsService" />
+	</bean>
+
+	<!-- 项目实现的URL-授权查询服务 -->
+	<bean id="resourceDetailsService"
+		class="org.pfw.framework.service.security.ResourceDetailsSecutrityManager">
+		<property name="securityEntityManager"
+			ref="securityEntityManager" />
+	</bean>
+
+	<!-- 重新定义的FilterSecurityInterceptor,使用databaseDefinitionSource提供的url-授权关系定义 -->
+	<bean id="filterSecurityInterceptor"
+		class="org.springframework.security.intercept.web.FilterSecurityInterceptor">
+		<s:custom-filter before="FILTER_SECURITY_INTERCEPTOR" />
+		<property name="accessDecisionManager"
+			ref="accessDecisionManager" />
+		<property name="objectDefinitionSource"
+			ref="databaseDefinitionSource" />
+	</bean>
+
+
+
+
+	<!-- cookie认证过滤器 -->
+	<bean id="rememberMeProcessingFilter"
+		class="org.springframework.security.ui.rememberme.RememberMeProcessingFilter">
+		<property name="authenticationManager"
+			ref="authenticationManager" />
+		<property name="rememberMeServices" ref="rememberMeServices" />
+	</bean>
+	<bean id="rememberMeServices"
+		class="org.springframework.security.ui.rememberme.TokenBasedRememberMeServices">
+		<property name="userDetailsService" ref="userDetailsService">
+		</property>
+		<!-- cookie中的键值, 防止保存到客户端的cookie中的加密串被恶意篡改 -->
+		<property name="key" value="e37f4b31-0c45-11dd-bd0b-0800200c9a66">
+		</property>
+		<!-- cookie有效时间, 单位为秒, 这里设定为两周内不用再登陆 -->
+		<property name="tokenValiditySeconds" value="1209600"></property>
+	</bean>
+
+
+	<!-- 20110201wlb：（AOP）控制全局范围的方法权限 -->
+	<!--<s:global-method-security access-decision-manager-ref="myAccessDecisionManager">
+		<s:protect-pointcut access="ROLE_ADMIN" expression="execution(* com.family168.springsecuritybook.ch201.MesageServiceImpl.admin*(..))"/>
+		</s:global-method-security>-->
+	<!--<s:intercept-methods access-decision-manager-ref="myAccessDecisionManager">
+		<s:protect access="ROLE_ADMIN" method="set*"/>
+		</s:intercept-methods>-->
+
+
+
+	<!-- 切换用户 -->
+	<!--<bean id="switchUserProcessingFilter" class="org.springframework.security.ui.switchuser.SwitchUserProcessingFilter" >   
+		<s:custom-filter position="SWITCH_USER_FILTER" />
+		<property name="userDetailsService" ref="userDetailsService" />
+		<property name="targetUrl" value="/login.action" />
+		</bean>-->
+	<!--<beans:bean id="switchUserProcessingFilter"  
+		class="org.springframework.security.ui.switchuser.SwitchUserProcessingFilter" autowire="byType">   
+		<custom-filter position="SWITCH_USER_FILTER" />   
+		切换用户以后登陆的页面    
+		<beans:property name="targetUrl" value="/ceshi/index.jsp" />   
+		</beans:bean>-->
+
+</beans>

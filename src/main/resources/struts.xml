@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	 
+	<!--<constant name="struts.convention.action.disableScanning" value="false"/>--> 
+	<!--<constant name="struts.convention.action.disableJarScanning" value="false"/>-->
+	<!--<constant name="struts.convention.action.packages" value=""/>--> 
+	<!--<constant name="struts.convention.result.path" value="/WEB-INF/content/"/>-->
+	<!--<constant name="struts.convention.result.flatLayout" value="false"/>--> 
+	
+	<constant name="struts.custom.i18n.resources" value="system,messageResource,modules"/> 
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+	
+	<!-- 结果类型 --> 
+    <constant name="struts.convention.relative.result.types" value="dispatcher,freemarker"/> 
+    
+    <!-- 允许页面条用java静态类 -->
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+    
+	<constant name="struts.convention.package.locators" value="web,action" />
+	<constant name="struts.convention.package.locators.basePackage" value="org.pfw.framework" />
+	<constant name="struts.convention.action.includeJars" value=".*/tq-(w/)*.*?jar(!/)?" />
+    <!-- action后缀 --> 
+    <constant name="struts.convention.action.suffix" value="Action"/> 
+	
+	<!-- 
+		使用Convention插件,实现约定大于配置的零配置文件风格.
+	           特殊的Result路径在Action类中使用@Result设定. 
+	-->
+	<constant name="struts.convention.default.parent.package" value="pfwdefault" />
+	
+	<!--<constant name="struts.convention.package.locators.disable" value="false"/>-->  
+	
+
+	<!-- 配置文件重新加载 -->
+	<constant name="struts.configuration.xml.reload" value="true" /> 
+	<!-- convention类从新加载 -->
+	<constant name="struts.convention.classes.reload" value="true" /> 
+	
+	
+	<!-- 20110208 add by wulibing: Spring AOP or Aspect not working with Autowired Dependencies,  -->
+	<constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true" />   
+	
+
+    <!-- 分隔符 一个action名字的获取。比如为HelloWorldAction。按照配置，actionName为hello_world。 -->  
+    <constant name="struts.convention.action.name.separator" value="_"/>   
+	
+	
+	
+    <!--<constant name="struts.serve.static" value="true" />-->
+    <!--<constant name="struts.serve.static.browserCache" value="false" />-->
+    <!--<constant name="struts.configuration.classpath.defaultParentPackage" value="pfwdefault"/>-->
+	
+	
+	<!-- 用于CRUD Action的parent package -->
+	<package name="pfwdefault" extends="convention-default">
+		<result-types> 
+             <result-type name="freemarker" class="org.pfw.framework.core.results.PFWFreemarkerResult"/> 
+         </result-types>
+         
+		<!-- 基于paramsPrepareParamsStack,
+			增加store interceptor保证actionMessage在redirect后不会丢失 -->
+        <interceptors>
+        	
+        	<interceptor name="token" class="org.apache.struts2.interceptor.TokenInterceptor"/>
+        	<!-- yxh cancel 
+        	-->
+			<interceptor-stack name="crudStack">
+			
+				<interceptor-ref name="store">
+					<param name="operationMode">AUTOMATIC</param>
+				</interceptor-ref>
+				
+				<interceptor-ref name="token"/>
+				<!-- yxh cancel
+				-->
+				<interceptor-ref name="paramsPrepareParamsStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="crudStack"/>
+
+		<global-results>
+        	<result name="login" type="redirect">/login.action</result>
+        	<result name="invalid.token">/common/token.jsp</result>
+        	<result name="wait">/common/wait.jsp</result>
+        	<result name="error">/common/500.jsp</result>
+        </global-results>
+	</package>
+	
+	
+    <package name="testssh2" extends="struts-default" namespace="/testssh2">
+        <global-results>
+            <result name="error">/common/error.jsp</result>
+        </global-results>
+        <action name="test" class="org.pfw.framework.web.TestAction">
+            <result name="test">/WEB-INF/test/a.jsp</result>
+        </action>
+    </package>
+</struts>
