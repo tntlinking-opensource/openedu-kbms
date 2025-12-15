@@ -75,7 +75,7 @@
 						<div class="portlet">
 							<div class="portlet-title">
 								<div class="caption">
-									查询结果
+									查询结果<span style="color:red">(注：上传文档后，切片需要安装向量数据库,安装说明详见部署文档)</span>
 								</div>
 								<div class="actions" id="pagemenubutton" ></div>
 							</div>
