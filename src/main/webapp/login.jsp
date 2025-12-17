@@ -33,7 +33,8 @@
 				-->
 				<div class="tips">系统登录
 				</div>
-				<div class="login-heading">用户登录</div>
+				<!--<div class="login-heading">用户登录</div>-->
+				<div class="login-heading"><img src="./mainface/image/loginLogo.png" height="50%" width="50%"></div>
 				<div class="login-name">用户名</div>
 				<div class="login-item control-group">
 					<input type="text" name="j_username"/>
@@ -64,7 +65,7 @@
 			</form>
 		</div>
 	</div>
-	<div class="footer">Copyright © 2023</div>
+	<div class="footer">本系统软件源代码来源于天天开源的许可</div>
 </div>
 <script type="text/javascript" src="./mainface/newlogin/js/jquery360.min.js"></script>
 <script type="text/javascript" src="./mainface/js/jquery.validate.min.js" ></script>

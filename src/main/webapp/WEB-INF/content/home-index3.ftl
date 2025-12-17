@@ -12,7 +12,7 @@
 	<link href="${base}/mainface/lui/css/style.min.css" rel="stylesheet">
 	<script type="text/javascript" src="${base}/mainface/lui/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${base}/mainface/layer/layer.js"></script>
-  
+  	<link rel="shortcut icon" href="./mainface/image/favicon.ico" />
 </head>
 <style>
 	.no1menu
