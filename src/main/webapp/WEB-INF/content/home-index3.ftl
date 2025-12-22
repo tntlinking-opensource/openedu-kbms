@@ -149,10 +149,21 @@
           </ul>
         </nav>
         
-        <!--
 	        <div class="sidebar-footer">
+	        	Copyright © 2025湖北天天数链技术有限公司
+			    <p>本系统软件源代码许可来源于
+			        <a href="https://open.tntlinking.com/communityTreaty" 
+			           target="_blank" 
+			           style="cursor: pointer; 
+			                  text-decoration: none; 
+			                  color: inherit; 
+			                  position: relative; 
+			                  display: inline-flex; 
+			                  align-items: center;">
+			            	《天天开源软件（社区版）许可协议》
+			    	</a>
+			    </p>
 	        </div>
-        -->
       </div>
       
     </aside>
